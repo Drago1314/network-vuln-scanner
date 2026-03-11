@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NetVulnScanner — Windows Setup Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.7; }
+  .hero { background: linear-gradient(135deg, #161b22, #21262d); padding: 48px 40px; border-bottom: 1px solid #30363d; }
+  .hero h1 { font-size: 2rem; color: #58a6ff; margin-bottom: 8px; }
+  .hero p { color: #8b949e; font-size: 1rem; }
+  .container { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+  .step { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .step-num { background: #58a6ff; color: #0d1117; font-weight: 800; font-size: 0.9rem; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step h2 { font-size: 1.1rem; color: #e6edf3; }
+  .step p, .step li { color: #8b949e; font-size: 0.95rem; margin-bottom: 6px; }
+  .step ul { padding-left: 20px; }
+  .step li { margin-bottom: 8px; }
+  code { background: #21262d; border: 1px solid #30363d; border-radius: 4px; padding: 2px 8px; font-family: Consolas, monospace; font-size: 0.88rem; color: #79c0ff; }
+  .code-block { background: #21262d; border: 1px solid #30363d; border-radius: 8px; padding: 16px 20px; margin: 14px 0; font-family: Consolas, monospace; font-size: 0.88rem; color: #e6edf3; white-space: pre; overflow-x: auto; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+  .badge-red { background: #FF3B3022; color: #FF3B30; border: 1px solid #FF3B3044; }
+  .badge-yellow { background: #e3b34122; color: #e3b341; border: 1px solid #e3b34144; }
+  .badge-green { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95044; }
+  .badge-blue { background: #58a6ff22; color: #58a6ff; border: 1px solid #58a6ff44; }
+  .warn { background: #e3b34112; border: 1px solid #e3b34144; border-radius: 8px; padding: 14px 18px; margin: 14px 0; color: #e3b341; font-size: 0.9rem; }
+  .info { background: #58a6ff12; border: 1px solid #58a6ff33; border-radius: 8px; padding: 14px 18px; margin: 14px 0; color: #79c0ff; font-size: 0.9rem; }
+  .success { background: #3fb95012; border: 1px solid #3fb95033; border-radius: 8px; padding: 14px 18px; margin: 14px 0; color: #3fb950; font-size: 0.9rem; }
+  a { color: #58a6ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+  th { background: #21262d; padding: 10px 14px; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: #8b949e; }
+  td { padding: 10px 14px; border-top: 1px solid #21262d; font-size: 0.9rem; color: #8b949e; }
+  .section-title { font-size: 1.3rem; color: #58a6ff; margin: 36px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #30363d; }
+  footer { text-align: center; padding: 30px; color: #8b949e; font-size: 0.8rem; border-top: 1px solid #30363d; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🛡️ NetVulnScanner — Windows Setup Guide</h1>
+  <p>Complete installation guide for Windows &nbsp;|&nbsp; Lenovo All-in-One compatible &nbsp;|&nbsp; Run CMD as Administrator</p>
+</div>
+
+<div class="container">
+
+  <div class="info">
+    ✅ Since you always run CMD as Administrator, ARP-based Scapy scans will work directly without any extra steps.
+  </div>
+
+  <!-- ── REQUIREMENTS TABLE ── -->
+  <div class="section-title">📋 Requirements Overview</div>
+  <table>
+    <thead><tr><th>Component</th><th>Version</th><th>Where to Get</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Python</td><td>3.10 or higher</td><td><a href="https://python.org/downloads" target="_blank">python.org/downloads</a></td><td><span class="badge badge-blue">Manual Install</span></td></tr>
+      <tr><td>Npcap</td><td>Latest</td><td><a href="https://npcap.com/#download" target="_blank">npcap.com/#download</a></td><td><span class="badge badge-red">Required for Scapy</span></td></tr>
+      <tr><td>Nmap binary</td><td>Latest stable</td><td><a href="https://nmap.org/download.html" target="_blank">nmap.org/download.html</a></td><td><span class="badge badge-red">Required for Port Scan</span></td></tr>
+      <tr><td>scapy</td><td>2.5.0+</td><td><code>pip install scapy</code></td><td><span class="badge badge-green">Auto via setup.bat</span></td></tr>
+      <tr><td>python-nmap</td><td>0.7.1+</td><td><code>pip install python-nmap</code></td><td><span class="badge badge-green">Auto via setup.bat</span></td></tr>
+      <tr><td>tkinter</td><td>Built-in</td><td>Comes with Python</td><td><span class="badge badge-green">No Install Needed</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ── STEP 1: PYTHON ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <h2>Install Python 3.10+</h2>
+    </div>
+    <p>Go to <a href="https://python.org/downloads" target="_blank">python.org/downloads</a> and download the latest Python installer.</p>
+    <div class="warn">
+      ⚠️ During installation — <strong>MUST tick:</strong><br>
+      &nbsp;&nbsp;✅ "Add Python to PATH" (bottom checkbox on first screen)<br>
+      &nbsp;&nbsp;✅ "Install pip" (in optional features)
+    </div>
+    <p>After install, verify in CMD:</p>
+    <div class="code-block">python --version
+pip --version</div>
+  </div>
+
+  <!-- ── STEP 2: NPCAP ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <h2>Install Npcap <span class="badge badge-red">Critical for ARP scan</span></h2>
+    </div>
+    <p>Scapy requires Npcap to capture and send raw packets on Windows. Do NOT use old WinPcap.</p>
+    <ul>
+      <li>Go to <a href="https://npcap.com/#download" target="_blank">npcap.com/#download</a></li>
+      <li>Download the <strong>Npcap installer</strong> (free version is fine)</li>
+      <li>During installation, tick: <strong>"WinPcap API-compatible Mode"</strong></li>
+      <li>Restart CMD after installing</li>
+    </ul>
+    <div class="warn">⚠️ Install ONLY Npcap. Do NOT install WinPcap — it's outdated and will break Scapy.</div>
+  </div>
+
+  <!-- ── STEP 3: NMAP ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <h2>Install Nmap Binary <span class="badge badge-red">Required for Port Scanning</span></h2>
+    </div>
+    <p>python-nmap is just a Python wrapper — it needs the actual nmap binary installed.</p>
+    <ul>
+      <li>Go to <a href="https://nmap.org/download.html" target="_blank">nmap.org/download.html</a></li>
+      <li>Download <strong>"Latest stable release self-installer"</strong> (.exe)</li>
+      <li>Run installer — keep all default options</li>
+      <li>Nmap will auto-add itself to PATH</li>
+    </ul>
+    <p>Verify in CMD:</p>
+    <div class="code-block">nmap --version</div>
+  </div>
+
+  <!-- ── STEP 4: SETUP.BAT ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <h2>Run setup.bat <span class="badge badge-green">Installs Python Packages</span></h2>
+    </div>
+    <p>After Python, Npcap, and Nmap are installed — run the included batch file:</p>
+    <div class="code-block">:: In CMD (as Administrator), navigate to the project folder:
+cd C:\path\to\network_scanner
+
+:: Then run:
+setup.bat</div>
+    <p>This will automatically install <code>scapy</code> and <code>python-nmap</code> via pip and verify everything.</p>
+    <div class="success">✅ setup.bat handles pip install, version checks, and shows you what's missing.</div>
+  </div>
+
+  <!-- ── STEP 5: RUN ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <h2>Run the Scanner</h2>
+    </div>
+    <div class="code-block">:: Always run CMD as Administrator (you already do this)
+cd C:\path\to\network_scanner
+python main.py</div>
+    <p>The GUI will open. Your local network will be auto-detected in the Target field (e.g., <code>192.168.1.0/24</code>).</p>
+    <div class="info">
+      💡 If Npcap isn't installed yet, the scanner will automatically fall back to ping-based host discovery — port scanning with Nmap still works fine.
+    </div>
+  </div>
+
+  <!-- ── TROUBLESHOOTING ── -->
+  <div class="section-title">🔧 Troubleshooting</div>
+
+  <table>
+    <thead><tr><th>Error</th><th>Cause</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td><code>python not found</code></td><td>Python not in PATH</td><td>Reinstall Python, tick "Add to PATH"</td></tr>
+      <tr><td><code>nmap not found in path</code></td><td>Nmap binary missing</td><td>Install from nmap.org, restart CMD</td></tr>
+      <tr><td>ARP scan fails / no hosts found</td><td>Npcap missing or no admin</td><td>Install Npcap + run CMD as Admin</td></tr>
+      <tr><td><code>ImportError: scapy</code></td><td>Pip package missing</td><td>Run <code>pip install scapy</code></td></tr>
+      <tr><td>GUI doesn't open</td><td>tkinter missing</td><td>Reinstall Python with "tcl/tk" ticked</td></tr>
+      <tr><td>Scan hangs / very slow</td><td>Firewall blocking</td><td>Allow nmap.exe in Windows Defender Firewall</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ── PROJECT STRUCTURE ── -->
+  <div class="section-title">📁 Project Structure</div>
+  <div class="code-block">network_scanner/
+├── main.py                  ← Run this
+├── setup.bat                ← Run this first (as Admin)
+├── requirements.txt
+├── scanner/
+│   ├── host_scanner.py      ← Scapy ARP + Nmap port scanner
+│   └── vuln_mapper.py       ← OWASP Top 10 mapper
+├── reports/
+│   └── generator.py         ← HTML + CSV report export
+├── gui/
+│   └── dashboard.py         ← Tkinter GUI dashboard
+└── output_reports/          ← Generated reports saved here</div>
+
+</div>
+
+<footer>NetVulnScanner &nbsp;|&nbsp; Windows Setup Guide &nbsp;|&nbsp; For authorized/educational use only</footer>
+</body>
+</html>

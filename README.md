@@ -179,7 +179,7 @@ Severity weights: `CRITICAL=10` · `HIGH=5` · `MEDIUM=2` · `LOW=1` · `INFO=0`
 ## 👨‍💻 Author
 
 **Faazil Mirza Shaikh**  
-B.Tech Computer Science — M.H. Saboo Siddik College of Engineering, Mumbai  
+B.E. Computer Science — M.H. Saboo Siddik College of Engineering, Mumbai  
 Specialization: Cybersecurity · IoT · Blockchain
 
 *Built as part of EHDF (Ethical Hacking & Digital Forensics) coursework.*

@@ -11,7 +11,7 @@
 ![OWASP](https://img.shields.io/badge/OWASP-Top%2010-000000?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-*Detects open ports, active hosts, and potential vulnerabilities on a local network —
+*Detects open ports, active hosts, and potential vulnerabilities on a local network, 
 mapped against OWASP Top 10 with automated risk reports and a live GUI dashboard.*
 
 </div>
@@ -20,7 +20,7 @@ mapped against OWASP Top 10 with automated risk reports and a live GUI dashboard
 
 ## 📸 Screenshot
 
-> Real-time scan of a local network — 2 hosts discovered, 9 findings across CRITICAL/HIGH/MEDIUM severities, live log with Nmap output.
+> Real-time scan of a local network, 2 hosts discovered, 9 findings across CRITICAL/HIGH/MEDIUM severities, live log with Nmap output.
 
 ![NetVulnScanner Dashboard](docs/screenshot.png)
 
